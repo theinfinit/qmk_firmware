@@ -1,34 +1,17 @@
-#include QMK_KEYBOARD_H
-// #include "keymap.h"
+#include "keymap.h"
 
-enum ctrl_keycodes {
-    U_T_AUTO = SAFE_RANGE, //USB Extra Port Toggle Auto Detect / Always Active
-    U_T_AGCR,              //USB Toggle Automatic GCR control
-    DBG_TOG,               //DEBUG Toggle On / Off
-    DBG_MTRX,              //DEBUG Toggle Matrix Prints
-    DBG_KBD,               //DEBUG Toggle Keyboard Prints
-    DBG_MOU,               //DEBUG Toggle Mouse Prints
-    MD_BOOT,               //Restart into bootloader after hold timeout
-};
+static uint8_t key_event_counter;       // This counter is used to check if any keys are being held
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [0] = LAYOUT(
-        KC_ESC,  KC_F1,        KC_F2,        KC_F3,        KC_F4,        KC_F5, KC_F6, KC_F7,        KC_F8,        KC_F9,        KC_F10,          KC_F11,  KC_F12,           KC_PSCR, KC_SLCK, KC_PAUS, \
-        KC_GRV,  KC_1,         KC_2,         KC_3,         KC_4,         KC_5,  KC_6,  KC_7,         KC_8,         KC_9,         KC_0,            KC_MINS, KC_EQL,  KC_BSPC, KC_INS,  KC_HOME, KC_PGUP, \
-        KC_TAB,  KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,  KC_Y,  KC_U,         KC_I,         KC_O,         KC_P,            KC_LBRC,  KC_RBRC, KC_BSLS, KC_DEL,  KC_END,  KC_PGDN, \
-        MO(6),   LALT_T(KC_A), LSFT_T(KC_S), LCTL_T(KC_D), LGUI_T(KC_F), KC_G,  KC_H,  RGUI_T(KC_J), RCTL_T(KC_K), RSFT_T(KC_L), RALT_T(KC_SCLN), LT(5,KC_QUOT), KC_ENT, \
-        KC_LSFT, KC_Z,         KC_X,         KC_C,         KC_V,         KC_B,  KC_N,  KC_M,         KC_COMM,      KC_DOT,       KC_SLSH,         KC_ESC,                             KC_UP, \
-        KC_LCTL, KC_LGUI, MO(4),                                         KC_SPC,                                   MO(3),        MO(2),           KC_APP,  KC_RCTL,          KC_LEFT, KC_DOWN, KC_RGHT \
+    [_KL] = LAYOUT(
+        KC_ESC,  KC_F1,        KC_F2,        KC_F3,        KC_F4,        KC_F5, KC_F6, KC_F7,        KC_F8,        KC_F9,        KC_F10,          KC_F11,        KC_F12,           KC_PSCR, KC_SLCK, KC_PAUS, \
+        KC_GRV,  KC_1,         KC_2,         KC_3,         KC_4,         KC_5,  KC_6,  KC_7,         KC_8,         KC_9,         KC_0,            KC_MINS,       KC_EQL,  KC_BSPC, KC_INS,  KC_HOME, KC_PGUP, \
+        KC_TAB,  KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,  KC_Y,  KC_U,         KC_I,         KC_O,         KC_P,            KC_LBRC,       KC_RBRC, KC_BSLS, KC_DEL,  KC_END,  KC_PGDN, \
+        MO(_FL), LALT_T(KC_A), LSFT_T(KC_S), LCTL_T(KC_D), LGUI_T(KC_F), KC_G,  KC_H,  RGUI_T(KC_J), RCTL_T(KC_K), RSFT_T(KC_L), RALT_T(KC_SCLN), LT(_NSL,KC_QUOT), KC_ENT, \
+        KC_LSFT, KC_Z,         KC_X,         KC_C,         KC_V,         KC_B,  KC_N,  KC_M,         KC_COMM,      KC_DOT,       KC_SLSH,         KC_ESC,                                   KC_UP, \
+        KC_LCTL, KC_LGUI, MO(_SL),                                       KC_SPC,                                   MO(_NL),      MO(_ML),           KC_APP,        KC_RCTL,          KC_LEFT, KC_DOWN, KC_RGHT \
     ),
-    [1] = LAYOUT(
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,           KC_7,    KC_8,    KC_9, \
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  KC_4,    KC_5,    KC_6, \
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  KC_1,    KC_2,    KC_3, \
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,                             KC_0, \
-        _______, _______, _______,                            _______,                   _______, _______, _______, _______,           KC_MINS, KC_COMM, KC_DOT \
-    ),
-    [2] = LAYOUT(
+    [_ML] = LAYOUT(
         _______, _______,  _______, _______, _______,  _______,  _______, _______, _______,   _______, _______, _______, _______,          KC_PSCR, _______, _______, \
         _______, RGB_M_P,  RGB_M_B, RGB_M_R, RGB_M_SW, RGB_M_SN, RGB_M_K, RGB_M_X, RGB_M_G,   RGB_M_T, _______, _______, _______, _______, KC_MNXT, KC_MUTE, KC_VOLU, \
         BL_BRTG, RGB_SPD,  RGB_VAI, RGB_SPI, RGB_HUI,  RGB_SAI,  _______, U_T_AUTO, U_T_AGCR, _______, _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_VOLD, \
@@ -36,7 +19,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, RGB_TOG,  BL_TOGG, BL_STEP, _______,  RESET,    NK_TOGG, _______, _______,   _______, _______,                                     _______, \
         _______, _______,  _______, _______, _______,  _______,  _______, _______, _______,                                                _______, _______, _______ \
     ),
-    [3] = LAYOUT(
+    [_NL] = LAYOUT(
         _______,      _______,    _______,      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,           _______, _______, _______, \
         _______,      KC_F1,      KC_F2,        KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, _______,  _______, _______, _______, \
         LALT(KC_TAB), KC_EXLM,    KC_AT,        KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_EQL,  KC_UNDS, _______, _______, _______,  _______, _______, _______, \
@@ -44,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,      _______,    _______,      KC_UNDS, _______, _______, KC_EQL,  KC_LBRC, KC_RBRC, _______, _______, _______,                             _______, \
         _______,      _______,    _______,                                 _______,                   _______, _______, _______, _______,           _______, _______, _______ \
     ),
-    [4] = LAYOUT(
+    [_SL] = LAYOUT(
         _______,      _______,    _______,      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,           _______, _______, _______, \
         _______,      KC_F1,      KC_F2,        KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, _______,  _______, _______, _______, \
         LALT(KC_TAB), KC_1,       KC_2,         KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, _______, _______,  _______, _______, _______, \
@@ -52,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,      _______,    _______,      _______, KC_UNDS, _______, KC_EQL,  KC_LCBR, KC_RCBR, _______, _______, _______,                             _______, \
         _______,      _______,    _______,                                 _______,                   _______, _______, _______, _______,           _______, _______, _______ \
     ),
-    [5] = LAYOUT(
+    [_NSL] = LAYOUT(
         _______,      _______,    _______,      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,           _______, _______, _______, \
         _______,      _______,    _______,      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______, \
         LALT(KC_TAB), _______,    _______,      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______, \
@@ -60,13 +43,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,      _______,    _______,      KC_UNDS, _______, _______, KC_EQL,  KC_LBRC, KC_RBRC, _______, _______, _______,                             _______, \
         _______,      _______,    _______,                                 _______,                   _______, _______, _______, _______,           _______, _______, _______ \
     ),
-    [6] = LAYOUT(
-        _______, _______, _______,            _______,       _______,       _______,       _______, _______,    _______, _______, _______, _______, TG(1),            _______, _______, _______, \
-        KC_TILD, KC_EXLM, KC_AT,              KC_HASH,       KC_DLR,        KC_PERC,       KC_CIRC, KC_AMPR,    KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, KC_PLUS, _______, _______, _______, _______, \
-        _______, _______, _______,            LCTL(KC_LEFT), LCTL(KC_RGHT), _______,       _______, LCTL(KC_Z), KC_HOME, KC_END,  _______, _______, _______, _______, _______, _______, _______, \
-        _______, _______, LSFT_T(LCTL(KC_S)), KC_DEL,        KC_BSPC,       LCTL(KC_BSPC), KC_LEFT, KC_DOWN,    KC_UP,   KC_RGHT, KC_ENT,  _______, _______, \
-        _______, _______, LCTL(KC_X),         LCTL(KC_C),    LCTL(KC_V),    _______,       _______, _______,    _______, _______, _______, _______,                            _______, \
-        _______, _______, _______,                                          _______,                                     _______, _______, _______, _______,          _______, _______, _______ \
+    [_FL] = LAYOUT(
+        _______, _______, _______,            _______,       _______,       _______,       _______, _______,    _______, _______,    _______, _______, _______,             _______, _______, _______, \
+        KC_TILD, KC_EXLM, KC_AT,              KC_HASH,       KC_DLR,        KC_PERC,       KC_CIRC, KC_AMPR,    KC_ASTR, KC_LPRN,    KC_RPRN, KC_UNDS, KC_PLUS, _______,    _______, _______, _______, \
+        _______, _______, _______,            LCTL(KC_LEFT), LCTL(KC_RGHT), _______,       VIM_Y, LCTL(KC_Z), KC_HOME, KC_END, LCTL(KC_ENT), _______, _______, _______, _______, _______, _______, \
+        _______, _______, LSFT_T(LCTL(KC_S)), KC_DEL,        KC_BSPC,       VIM_G, KC_LEFT, KC_DOWN,    KC_UP,   KC_RGHT,    KC_ENT,  _______, _______, \
+        _______, COPY_ALL, LCTL(KC_X),        LCTL(KC_INS),    LSFT(KC_INS),    _______,       _______, _______,    _______, _______,    _______, _______,                               _______, \
+        _______, _______, _______,                                          _______,                                     _______,    _______, _______, _______,             _______, _______, _______ \
+    ),
+    [_YANK] = LAYOUT(
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, \
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+        _______, _______, _______, COPY_WORD_BACKWARDS, COPY_WORD, _______, COPY_LINE, _______, COPY_TO_BOL, COPY_TO_EOL, _______, _______, _______, _______, _______, _______, _______, \
+        _______, COPY_ALL, _______, _______, _______, _______, COPY_WORD_BACKWARDS, COPY_TWO_LINES_DOWN, COPY_TWO_LINES_UP, COPY_WORD, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,                            _______, \
+        _______, _______, _______,                            _______,                   _______, _______, _______, _______,          _______, _______, _______ \
     )
 };
 
@@ -74,7 +65,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void) {
-rgb_enabled_flag = true;  // Initially, keyboard RGB is enabled. Change to false config.h initializes RGB disabled.
+    key_event_counter = 0;    // Counter to determine if keys are being held, neutral at 0.
+    rgb_enabled_flag = true;  // Initially, keyboard RGB is enabled. Change to false config.h initializes RGB disabled.
 };
 
 void keyboard_post_init_user(void) { rgb_matrix_enable(); }
@@ -89,6 +81,13 @@ void matrix_scan_user(void){};
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     static uint32_t key_timer;
+
+    // Increment key event counter for every press and decrement for every release.
+    if (record->event.pressed) {
+        key_event_counter++;
+    } else {
+        key_event_counter--;
+    }
 
     switch (keycode) {
         case U_T_AUTO:
@@ -156,7 +155,96 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
               }
             }
             return false;
-        default:
-            return true; //Process all other keycodes normally
     }
+
+    if (record->event.pressed) {
+        switch (keycode) {
+            // ======================================== CUSTOM KEYCODES BELOW ========================================
+            case VIM_G:
+                if( get_mods() && MOD_BIT(KC_LSFT)) {
+                    unregister_code(KC_LSFT);
+                    SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_END) SS_UP(X_LCTL));
+                } else {
+                    tap_code16(C(KC_BSPC));
+                }
+                return false;
+
+            // VIM Yank
+            case VIM_Y:
+                // Copy to the end of line
+                if( get_mods() && MOD_BIT(KC_LSFT) ) {
+                    SEND_STRING(SS_DOWN(X_LSFT) SS_TAP(X_END) SS_TAP(X_END) SS_UP(X_LSFT));
+                    SEND_STRING(SS_DOWN(X_LCTL) "c" SS_UP(X_LCTL));
+                    tap_code16(KC_LEFT);
+                // Activate VIM Yank one shot layer
+                } else {
+                    layer_on(_YANK);
+                    set_oneshot_layer(_YANK, ONESHOT_START);
+                }
+                return false;
+            case COPY_ALL:
+                // Select all text and copy
+                tap_code16(C(KC_A));
+                tap_code16(C(KC_INS));
+                layer_off(_YANK);
+                return false;
+            case COPY_WORD:
+                // Select word, copy, deselect
+                SEND_STRING(SS_DOWN(X_LSFT) SS_DOWN(X_LCTL) SS_TAP(X_RGHT) SS_UP(X_LSFT) "c" SS_UP(X_LCTL));
+                tap_code16(KC_LEFT);
+                layer_off(_YANK);
+                return false;
+            case COPY_WORD_BACKWARDS:
+                // Select word backwards, copy, deselect
+                SEND_STRING(SS_DOWN(X_LSFT) SS_DOWN(X_LCTL) SS_TAP(X_LEFT) SS_UP(X_LSFT) "c" SS_UP(X_LCTL));
+                tap_code16(KC_RGHT);
+                layer_off(_YANK);
+                return false;
+
+            case COPY_LINE:
+                // Select whole line, copy, deselect
+                SEND_STRING(SS_TAP(X_HOME) SS_TAP(X_HOME) SS_DOWN(X_LSFT) SS_TAP(X_END) SS_TAP(X_END) SS_UP(X_LSFT));
+                SEND_STRING(SS_DOWN(X_LCTL) "c" SS_UP(X_LCTL));
+                tap_code16(KC_RGHT);
+                layer_off(_YANK);
+                return false;
+            case COPY_TO_EOL:
+                // Select from cursor to the end of line, copy, deselect
+                SEND_STRING(SS_DOWN(X_LSFT) SS_TAP(X_END) SS_TAP(X_END) SS_UP(X_LSFT));
+                SEND_STRING(SS_DOWN(X_LCTL) "c" SS_UP(X_LCTL));
+                tap_code16(KC_LEFT);
+                layer_off(_YANK);
+                return false;
+            case COPY_TO_BOL:
+                // Select from cursor to the beginning of line, copy, deselect
+                SEND_STRING(SS_DOWN(X_LSFT) SS_TAP(X_END) SS_TAP(X_END) SS_UP(X_LSFT));
+                SEND_STRING(SS_DOWN(X_LCTL) "c" SS_UP(X_LCTL));
+                tap_code16(KC_RGHT);
+                layer_off(_YANK);
+                return false;
+            case COPY_TWO_LINES_UP:
+                // Copy current line and one up
+                SEND_STRING(SS_TAP(X_END) SS_TAP(X_END) SS_DOWN(X_LSFT) SS_TAP(X_HOME) SS_TAP(X_HOME) SS_TAP(X_UP) SS_TAP(X_HOME) SS_TAP(X_HOME) SS_UP(X_LSFT));
+                SEND_STRING(SS_DOWN(X_LCTL) "c" SS_UP(X_LCTL));
+                tap_code16(KC_LEFT);
+                layer_off(_YANK);
+                return false;
+            case COPY_TWO_LINES_DOWN:
+                // Copy current line and one down
+                SEND_STRING(SS_TAP(X_HOME) SS_TAP(X_HOME) SS_DOWN(X_LSFT) SS_TAP(X_END) SS_TAP(X_END) SS_TAP(X_DOWN) SS_TAP(X_END) SS_TAP(X_END) SS_UP(X_LSFT));
+                SEND_STRING(SS_DOWN(X_LCTL) "c" SS_UP(X_LCTL));
+                tap_code16(KC_RGHT);
+                layer_off(_YANK);
+                return false;
+        }
+    }
+
+    /* Always cancel one-shot layer when another key gets pressed */
+    if (key_event_counter != 0 && get_highest_layer(layer_state) == _YANK && keycode != VIM_Y) {
+        layer_off(_YANK);
+        return false;
+    }
+
+    return true; //Process all other keycodes normally
 }
+
