@@ -48,10 +48,10 @@ enum ctrl_keycodes {
 
 enum layout_names {
     _KL=0,                      // Keys Layout: The main keyboard layout that has all the characters
-    _FL,                        // Function Layout: The function key activated layout with default functions and some added ones
-    _NL,                        // Numbers Layout
-    _NSL,                       // Symbols from number row
-    _SL,                        // Symbols Layout
     _ML,
+    _NL,                        // Numbers Layout
+    _SL,                        // Symbols Layout
+    _NSL,                       // Symbols from number row
+    _FL,                        // Function Layout: The function key activated layout with default functions and some added ones
     _YANK,                      // VIM Yank Layout
 };
