@@ -76,7 +76,6 @@ enum layout_names {
     _SL,                        // Symbols Layout
     _NSL,                       // Symbols from number row
     _FL,                        // Function Layout: The function key activated layout with default functions and some added ones
-    _LEADER,                    // Leader Key 
     _VIM_YANK,                  // VIM Yank Layout
     _VIM_DELETE,                // VIM Delete Layout
     _VIM_CHANGE,                // VIM Change Layout
