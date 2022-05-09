@@ -385,14 +385,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     /* Always cancel one-shot layer when another key gets pressed */
     if (key_event_counter != 0 && get_highest_layer(layer_state) == _VIM_YANK && keycode != VIM_Y) {
         layer_off(_VIM_YANK);
+        layer_off(_FL);
         return false;
     } 
     if (key_event_counter != 0 && get_highest_layer(layer_state) == _VIM_DELETE && keycode != VIM_D) {
         layer_off(_VIM_DELETE);
+        layer_off(_FL);
         return false;
     } 
     if (key_event_counter != 0 && get_highest_layer(layer_state) == _VIM_CHANGE && keycode != VIM_C) {
         layer_off(_VIM_CHANGE);
+        layer_off(_FL);
         return false;
     } 
     /* ---------------------------------------------------------- */
