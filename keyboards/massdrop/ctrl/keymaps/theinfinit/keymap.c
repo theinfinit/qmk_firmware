@@ -44,12 +44,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,      _______, _______,                             _______,                   _______, _______, _______, _______,           _______, _______, _______ \
     ),
     [_FL] = LAYOUT(
-        _______, _______,        _______,      _______,       _______,       _______,    _______, _______,    _______, _______,  _______,      _______,  _______,             _______, _______, _______, \
-        KC_TILD, KC_EXLM,        KC_AT,        KC_HASH,       KC_DLR,        KC_PERC,    KC_CIRC, KC_AMPR,    KC_ASTR, KC_LPRN,  KC_RPRN,      KC_UNDS,  KC_PLUS, _______,    _______, _______, _______, \
-        _______, _______,        KC_PGDN,      LCTL(KC_LEFT), LCTL(KC_RGHT), KC_PGUP,    YANK,    LCTL(KC_Z), KC_HOME, KC_END,   LSFT(KC_INS), _______,  _______, _______,    _______, _______, _______, \
-        _______, LALT_T(KC_INS), LSFT_T(KC_S), KC_DEL,        BSPC_BOF,      C_BSPC_EOF, KC_LEFT, KC_DOWN,    KC_UP,   KC_RGHT,  KC_ENT,       NEW_LINE, _______, \
-        _______, _______,        LCTL(KC_X),      COPY_CUT,      LSFT(KC_INS),  _______,    _______, _______,    _______, _______,  _______,      _______,                                _______, \
-        _______, _______,        _______,                                                _______,                      _______,  _______,      _______,  _______,             _______, _______, _______ \
+        _______, _______,        _______,      _______,       _______,       _______,       _______, _______,    _______, _______,  _______,      _______,  _______,             _______, _______, _______, \
+        KC_TILD, KC_EXLM,        KC_AT,        KC_HASH,       KC_DLR,        KC_PERC,       KC_CIRC, KC_AMPR,    KC_ASTR, KC_LPRN,  KC_RPRN,      KC_UNDS,  KC_PLUS, _______,    _______, _______, _______, \
+        _______, _______,        KC_PGDN,      LCTL(KC_LEFT), LCTL(KC_RGHT), KC_PGUP,       YANK,    LCTL(KC_Z), KC_HOME, KC_END,   LSFT(KC_INS), _______,  _______, _______,    _______, _______, _______, \
+        _______, LALT_T(KC_INS), LSFT_T(KC_S), KC_DEL,        KC_BSPC,       LCTL(KC_BSPC), KC_LEFT, KC_DOWN,    KC_UP,   KC_RGHT,  KC_ENT,       NEW_LINE, _______, \
+        _______, _______,        LCTL(KC_X),   COPY_CUT,      LSFT(KC_INS),  _______,       _______, _______,    _______, _______,  _______,      _______,                                _______, \
+        _______, _______,        _______,                                                   _______,                      _______,  _______,      _______,  _______,             _______, _______, _______ \
     )
 };
 
@@ -152,29 +152,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
         switch (keycode) {
             // ======================================== CUSTOM KEYCODES BELOW ========================================
-            case BSPC_BOF:
-                if( get_mods() && MOD_BIT(KC_LSFT)) {
-                    unregister_code(KC_LSFT);
-                    SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_HOME) SS_UP(X_LCTL));
-                    register_code(KC_LSFT);
-                } else {
-                    tap_code16(KC_BSPC);
-                }
-                return false;
-            case C_BSPC_EOF:
-                if( get_mods() && MOD_BIT(KC_LSFT)) {
-                    unregister_code(KC_LSFT);
-                    SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_END) SS_UP(X_LCTL));
-                    register_code(KC_LSFT);
-                } else {
-                    tap_code16(C(KC_BSPC));
-                }
-                return false;
             case NEW_LINE:
                 if( get_mods() && MOD_BIT(KC_LSFT) ) {
                     // Create new line above cursor
                     unregister_code(KC_LSFT);
-                    SEND_STRING(SS_TAP(X_HOME) SS_TAP(X_HOME) SS_TAP(X_UP) SS_TAP(X_END) SS_TAP(X_END) SS_TAP(X_ENT));
+                    SEND_STRING(SS_TAP(X_HOME) SS_TAP(X_HOME) SS_TAP(X_ENT) SS_TAP(X_UP));
                 } else {
                     // Create new line below cursor
                     SEND_STRING(SS_TAP(X_END) SS_TAP(X_END) SS_TAP(X_ENT));
@@ -206,7 +188,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_INS) SS_UP(X_LCTL));
                 }
                 return false;
-
         }
     }
 
