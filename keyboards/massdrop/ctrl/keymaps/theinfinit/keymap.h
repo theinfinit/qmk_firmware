@@ -41,10 +41,14 @@ enum ctrl_keycodes {
     NEW_LINE,                   // Create new line below cursor (with Shift—above cursor)
     YANK,                       // Ctrl + Ins (Copy) on tap / Copy to the EOL with shift
     COPY_CUT,                   // Ctrl + x (Cut) on tap / Cut current line with shift
+
+    KL,
+    QWERTY,
 };
 
 enum layout_names {
     _KL=0,                      // Keys Layout: The main keyboard layout that has all the characters
+    _QWERTY,                    // Qwerty Layout without Mods on hold
     _ML,
     _NL,                        // Numbers Layout
     _SL,                        // Symbols Layout
