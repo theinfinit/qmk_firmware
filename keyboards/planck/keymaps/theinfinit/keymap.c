@@ -47,15 +47,15 @@ enum planck_keycodes {
 #define FN MO(_FN)
 
 // Mod on hold, key on tap
-#define LALT_A LALT_T(KC_A) // Hold: Left Alt    // Tap: A
-#define LSFT_S LSFT_T(KC_S) // Hold: Left Shift  // Tap: S
-#define LCTL_D LCTL_T(KC_D) // Hold: Left Ctrl   // Tap: D
-#define LGUI_F LGUI_T(KC_F) // Hold: Left GUI    // Tap: F
+#define LALT_A LALT_T(KC_A)       // Hold: Left Alt    // Tap: A
+#define LSFT_S LSFT_T(KC_S)       // Hold: Left Shift  // Tap: S
+#define LCTL_D LCTL_T(KC_D)       // Hold: Left Ctrl   // Tap: D
+#define LGUI_F LGUI_T(KC_F)       // Hold: Left GUI    // Tap: F
 
-#define RGUI_F LGUI_T(KC_F) // Hold: Right GUI   // Tap: J
-#define RCTL_D LCTL_T(KC_D) // Hold: Right Ctrl  // Tap: K
-#define RSFT_S LSFT_T(KC_S) // Hold: Right Shift // Tap: L
-#define RALT_A LALT_T(KC_A) // Hold: Right Alt   // Tap: ;
+#define RGUI_J RGUI_T(KC_J)       // Hold: Right GUI   // Tap: J
+#define RCTL_K RCTL_T(KC_K)       // Hold: Right Ctrl  // Tap: K
+#define RSFT_L RSFT_T(KC_L)       // Hold: Right Shift // Tap: L
+#define RALT_SCLN RALT_T(KC_SCLN) // Hold: Right Alt   // Tap: ;
 
 #define LCTL_PS LCTL_T(KC_PSCR) // Hold: Left Ctrl   // Tap: Print Screen
 
@@ -78,10 +78,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                 └─────┴─────┴─────┴─────┴─────┴─────┴   ┴─────┴─────┴─────┴─────┴─────┴─────┘
  */
 [_QWERTY] = LAYOUT_planck_grid(
-    KC_TAB,  KC_Q,    KC_W,   KC_E,    KC_R,   KC_T,   KC_Y,  KC_U,         KC_I,         KC_O,         KC_P,            KC_QUOT,
-    MO(_TL), LALT_A,  LSFT_S, LCTL_D,  LGUI_F, KC_G,   KC_H,  RGUI_T(KC_J), RCTL_T(KC_K), RSFT_T(KC_L), RALT_T(KC_SCLN), KC_ENT,
-    KC_LSFT, KC_Z,    KC_X,   KC_C,    KC_V,   KC_B,   KC_N,  KC_M,         KC_COMM,      KC_DOT,       KC_SLSH,         KC_ESC,
-    LCTL_PS, KC_LGUI, FKEYS,  KC_LALT, RAISE,  KC_SPC, NAV,   LOWER,        MO(_SL)       KC_INS,       FN,              KC_APP
+    KC_TAB,  KC_Q,    KC_W,   KC_E,    KC_R,   KC_T,   KC_Y,  KC_U,   KC_I,    KC_O,   KC_P,      KC_QUOT,
+    MO(_TL), LALT_A,  LSFT_S, LCTL_D,  LGUI_F, KC_G,   KC_H,  RGUI_J, RCTL_K,  RSFT_L, RALT_SCLN, KC_ENT,
+    KC_LSFT, KC_Z,    KC_X,   KC_C,    KC_V,   KC_B,   KC_N,  KC_M,   KC_COMM, KC_DOT, KC_SLSH,   KC_ESC,
+    LCTL_PS, KC_LGUI, FKEYS,  KC_LALT, RAISE,  KC_SPC, NAV,   LOWER,  MO(_SL), KC_INS, FN,        KC_APP
 ),
 
 /* Stenography layer
@@ -180,13 +180,13 @@ _______, _______, _______,  _______, _______, _______, _______, _______, _______
  *
  *                RGB CONTROL -----/````````````````````````````````````````````````````````\
  *           ┌──────┬──────┬──────┬──────┬──────┬──────┬   ┬──────┬──────┬──────┬──────┬──────┬──────┐
- *           |      |Reset |Debug | RGB  |RGBMOD| HUE+ │   │ HUE- | SAT+ | SAT- |BRGTH+|BRGTH-|  Del |
+ *           │      │Reset │Debug │ RGB  │RGBMOD│ HUE+ │   │ HUE- │ SAT+ │ SAT- │BRGTH+│BRGTH-│  Del │
  *           ├──────┼──────┼──────┼──────┼──────┼──────┼   ┼──────┼──────┼──────┼──────┼──────┼──────┤
- *           |      |      |MUSmod|Aud on|Audoff|AGnorm│   │AGswap|Qwerty|      |      |Plover|      |
+ *           │      │      │MUSmod│Aud on│Audoff│AGnorm│   │AGswap│Qwerty│      │      │Plover│      │
  *           ├──────┼──────┼──────┼──────┼──────┼──────┼   ┼──────┼──────┼──────┼──────┼──────┼──────┤
- *           |      |Voice-|Voice+|Mus on|Musoff|MIDIon│   │MIDIof|TermOn|TermOf|      |      |      |
+ *           │      │Voice-│Voice+│Mus on│Musoff│MIDIon│   │MIDIof│TermOn│TermOf│      │      │      │
  *           ├──────┼──────┼──────┼──────┼──────┼──────┼   ┼──────┼──────┼──────┼──────┼──────┼──────┤
- *           |Brite |      |      |      |      |      │   │      |      |      |      |      |      |
+ *           │Brite │      │      │      │      │      │   │      │      │      │      │      │      │
  *           └──────┴──────┴──────┴──────┴──────┴──────┴   ┴──────┴──────┴──────┴──────┴──────┴──────┘
  */
 [_FN] = LAYOUT_planck_grid(
@@ -227,9 +227,9 @@ _______, _______, _______,  _______, _______, _______, _______, _______, _______
  */
 [_TL] = LAYOUT_planck_grid(
     _______, _______, KC_PGDN,      LCTL(KC_LEFT), LCTL(KC_RGHT), KC_PGUP,       YANK,    LCTL(KC_Z),   KC_HOME,       KC_END,  LSFT(KC_INS), _______, 
-    _______, _______,        LSFT_T(KC_S), KC_DEL,        KC_BSPC,       LCTL(KC_BSPC), KC_LEFT, KC_DOWN,      KC_UP,         KC_RGHT, KC_ENT,       NEW_LINE,
-    _______, _______,        _______,      YANK,          PASTE,         _______,       _______, LCTL(KC_END), LCTL(KC_HOME), _______, _______,      _______,          
-    _______, _______,        _______,      _______,       _______,       _______,       _______, _______,      _______,       _______, _______,      _______
+    _______, _______, LSFT_T(KC_S), KC_DEL,        KC_BSPC,       LCTL(KC_BSPC), KC_LEFT, KC_DOWN,      KC_UP,         KC_RGHT, KC_ENT,       NEW_LINE,
+    _______, _______, _______,      YANK,          PASTE,         _______,       _______, LCTL(KC_END), LCTL(KC_HOME), _______, _______,      _______,          
+    _______, _______, _______,      _______,       _______,       _______,       _______, _______,      _______,       _______, _______,      _______
 )
 
 /* Layer
