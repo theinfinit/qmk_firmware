@@ -233,10 +233,10 @@ _______, _______, _______,  _______, _______, _______, _______, _______, _______
  *                 ╰─────┴─────┴─────┴─────┴─────┴─────┴   ┴┴┴┴┴┴┴─────┴─────┴─────┴─────┴─────╯
  */
 [_NAV] = LAYOUT_planck_grid(
-    _______, _______,    KC_PGDN,            LCTL(KC_LEFT), LCTL(KC_RGHT), KC_PGUP,    LCTL(KC_INS), LCTL(KC_Z),   KC_HOME,       KC_END,  LSFT(KC_INS), _______, 
-    _______, LGUI(KC_0), LSFT_T(LGUI(KC_9)), LGUI(KC_8),    LGUI(KC_7),    LGUI(KC_6), KC_LEFT,      KC_DOWN,      KC_UP,         KC_RGHT, KC_ENT,       NEW_LINE,
-    _______, LGUI(KC_5), LGUI(KC_4),         LGUI(KC_3),    LGUI(KC_2),    LGUI(KC_1), _______,      LCTL(KC_END), LCTL(KC_HOME), _______, _______,      _______,
-    _______, _______,    _______,            _______,       _______,       _______,    _______,      _______,      _______,       _______, _______,      _______
+    _______, _______,    KC_PGDN,    LCTL(KC_LEFT), LCTL(KC_RGHT), KC_PGUP,    LCTL(KC_INS), LCTL(KC_Z),   KC_HOME,       KC_END,  LSFT(KC_INS), _______, 
+    _______, LGUI(KC_0), LGUI(KC_9), LGUI(KC_8),    LGUI(KC_7),    LGUI(KC_6), KC_LEFT,      KC_DOWN,      KC_UP,         KC_RGHT, KC_ENT,       NEW_LINE,
+    _______, LGUI(KC_5), LGUI(KC_4), LGUI(KC_3),    LGUI(KC_2),    LGUI(KC_1), _______,      LCTL(KC_END), LCTL(KC_HOME), _______, _______,      _______,
+    _______, _______,    _______,    _______,       _______,       _______,    _______,      _______,      _______,       _______, _______,      _______
 ),
 
 /* Top Layer
