@@ -47,3 +47,12 @@
 
 // Most tactile encoders have detents every 4 stages
 #define ENCODER_RESOLUTION 4
+
+// Combo feature timeout (defaults to TAPPING_TERM)
+#define COMBO_TERM 50
+
+// Size of combo_events enum.
+#define COMBO_COUNT 10
+
+#undef TAPPING_TERM
+#define TAPPING_TERM 260

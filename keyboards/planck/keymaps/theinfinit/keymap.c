@@ -83,6 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤
  * Tap for PrSc -- │ Ctl │ Gui │FKEYS│ Alt │Raise│Space│   │ Nav │Lower│ _SL │ Ins │ Fn  │ App │
  *                 ╰─────┴─────┴─────┴─────┴─────┴─────┴   ┴─────┴─────┴─────┴─────┴─────┴─────╯
+ *                                       Tap for Backspace __/
  */
 [_QWERTY] = LAYOUT_planck_grid(
     KC_TAB,  KC_Q,    KC_W,   KC_E,    KC_R,   KC_T,   KC_Y,  KC_U,   KC_I,    KC_O,   KC_P,      KC_QUOT,
@@ -225,18 +226,18 @@ _______, _______, _______,  _______, _______, _______, _______, _______, _______
  *                 ╭─────┬─────┬─────┬─────┬─────┬─────┬   ┬─────┬─────┬─────┬─────┬─────┬─────╮
  *                 │     │     │PgDn │Ctl+←│Ctl+→│PgUp │   │Copy │Ctl+z│Home │ End │Paste│     │
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤
- *                 │     │Gui+0│Gui+9│Gui+8│Gui+7│Gui+6│   │  ←  │  ↓  │  ↑  │  →  │Enter│NwLine
+ *                 │     │     │     │     │     │     │   │  ←  │  ↓  │  ↑  │  →  │Enter│NwLine
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤
- *                 │     │Gui+5│Gui+4│Gui+3│Gui+2│Gui+1│   │     │C+End│C+Hom│     │     │     │
+ *                 │     │     │     │     │     │     │   │     │C+End│C+Hom│     │     │     │
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼┬┬┬┬┬┼─────┼─────┼─────┼─────┼─────┤
  *                 │     │     │     │     │     │     │   │││││││     │     │     │     │     │
  *                 ╰─────┴─────┴─────┴─────┴─────┴─────┴   ┴┴┴┴┴┴┴─────┴─────┴─────┴─────┴─────╯
  */
 [_NAV] = LAYOUT_planck_grid(
-    _______, _______,    KC_PGDN,    LCTL(KC_LEFT), LCTL(KC_RGHT), KC_PGUP,    LCTL(KC_INS), LCTL(KC_Z),   KC_HOME,       KC_END,  LSFT(KC_INS), _______, 
-    _______, LGUI(KC_0), LGUI(KC_9), LGUI(KC_8),    LGUI(KC_7),    LGUI(KC_6), KC_LEFT,      KC_DOWN,      KC_UP,         KC_RGHT, KC_ENT,       NEW_LINE,
-    _______, LGUI(KC_5), LGUI(KC_4), LGUI(KC_3),    LGUI(KC_2),    LGUI(KC_1), _______,      LCTL(KC_END), LCTL(KC_HOME), _______, _______,      _______,
-    _______, _______,    _______,    _______,       _______,       _______,    _______,      _______,      _______,       _______, _______,      _______
+    _______, _______, KC_PGDN, LCTL(KC_LEFT), LCTL(KC_RGHT), KC_PGUP, LCTL(KC_INS), LCTL(KC_Z),   KC_HOME,       KC_END,  LSFT(KC_INS), _______, 
+    _______, _______, _______, _______,       _______,       _______, KC_LEFT,      KC_DOWN,      KC_UP,         KC_RGHT, KC_ENT,       NEW_LINE,
+    _______, _______, _______, _______,       _______,       _______, _______,      LCTL(KC_END), LCTL(KC_HOME), _______, _______,      _______,
+    _______, _______, _______, _______,       _______,       _______, _______,      _______,      _______,       _______, _______,      _______
 ),
 
 /* Top Layer
@@ -261,18 +262,18 @@ _______, _______, _______,  _______, _______, _______, _______, _______, _______
  *                 ╭─────┬─────┬─────┬─────┬─────┬─────┬   ┬─────┬─────┬─────┬─────┬─────┬─────╮
  *                 │     │     │PgDn │Alt+←│Alt+→│PgUp │   │Copy │Undo │Home │ End │Paste│     │
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤
- *                 │     │Gui+0│Gui+9│Gui+8│Gui+7│Gui+6│   │  ←  │  ↓  │  ↑  │  →  │Enter│NwLine
+ *                 │     │     │     │     │     │     │   │  ←  │  ↓  │  ↑  │  →  │Enter│NwLine
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤
- *                 │     │Gui+5│Gui+4│Gui+3│Gui+2│Gui+1│   │     │ C+↓ │ C+↑ │     │     │     │
+ *                 │     │     │     │     │     │     │   │     │ C+↓ │ C+↑ │     │     │     │
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼┬┬┬┬┬┼─────┼─────┼─────┼─────┼─────┤
  *                 │     │     │     │     │     │     │   │││││││     │     │     │     │     │
  *                 ╰─────┴─────┴─────┴─────┴─────┴─────┴   ┴┴┴┴┴┴┴─────┴─────┴─────┴─────┴─────╯
  */
 [_iNAV] = LAYOUT_planck_grid(
-    _______, _______,    LCTL(KC_DOWN),      LALT(KC_LEFT), LALT(KC_RGHT), LCTL(KC_UP), LGUI(KC_C), LGUI(KC_Z),    LCTL(KC_LEFT), LCTL(KC_RGHT), LGUI(KC_V), _______, 
-    _______, LGUI(KC_0), LSFT_T(LGUI(KC_9)), LGUI(KC_8),    LGUI(KC_7),    LGUI(KC_6),  KC_LEFT,    KC_DOWN,       KC_UP,         KC_RGHT,       KC_ENT,     NEW_LINE,
-    _______, LGUI(KC_5), LGUI(KC_4),         LGUI(KC_3),    LGUI(KC_2),    LGUI(KC_1),  _______,    LCTL(KC_DOWN), LCTL(KC_UP),   _______,       _______,    _______,
-    _______, _______,    _______,            _______,       _______,       _______,     _______,    _______,       _______,       _______,       _______,    _______
+    _______, _______, LCTL(KC_DOWN), LALT(KC_LEFT), LALT(KC_RGHT), LCTL(KC_UP), LGUI(KC_C), LGUI(KC_Z),    LCTL(KC_LEFT), LCTL(KC_RGHT), LGUI(KC_V), _______, 
+    _______, _______, _______,       _______,       _______,       _______,     KC_LEFT,    KC_DOWN,       KC_UP,         KC_RGHT,       KC_ENT,     NEW_LINE,
+    _______, _______, _______,       _______,       _______,       _______,     _______,    LCTL(KC_DOWN), LCTL(KC_UP),   _______,       _______,    _______,
+    _______, _______, _______,       _______,       _______,       _______,     _______,    _______,       _______,       _______,       _______,    _______
 ),
 
 /* Top Layer (Mac/iPad)
@@ -500,5 +501,108 @@ bool music_mask_user(uint16_t keycode) {
             return false;
         default:
             return true;
+    }
+}
+
+// ----------------------------------- COMBOS ----------------------------------
+
+enum combo_events {
+    MY_COMBO_LGUI_1, 
+    MY_COMBO_LGUI_2,
+    MY_COMBO_LGUI_3,
+    MY_COMBO_LGUI_4,
+    MY_COMBO_LGUI_5,
+    MY_COMBO_LGUI_6,
+    MY_COMBO_LGUI_7,
+    MY_COMBO_LGUI_8,
+    MY_COMBO_LGUI_9,
+    MY_COMBO_LGUI_0
+};
+
+const uint16_t PROGMEM combo_LGUI_1[] = { LOWER, KC_M, COMBO_END };
+const uint16_t PROGMEM combo_LGUI_2[] = { LOWER, KC_COMM, COMBO_END };
+const uint16_t PROGMEM combo_LGUI_3[] = { LOWER, KC_DOT, COMBO_END };
+const uint16_t PROGMEM combo_LGUI_4[] = { LOWER, RGUI_J, COMBO_END };
+const uint16_t PROGMEM combo_LGUI_5[] = { LOWER, RCTL_K, COMBO_END };
+const uint16_t PROGMEM combo_LGUI_6[] = { LOWER, RSFT_L, COMBO_END };
+const uint16_t PROGMEM combo_LGUI_7[] = { LOWER, KC_U, COMBO_END };
+const uint16_t PROGMEM combo_LGUI_8[] = { LOWER, KC_I, COMBO_END };
+const uint16_t PROGMEM combo_LGUI_9[] = { LOWER, KC_O, COMBO_END };
+const uint16_t PROGMEM combo_LGUI_0[] = { LOWER, RALT_SCLN, COMBO_END };
+
+combo_t key_combos[COMBO_COUNT] = {
+    [MY_COMBO_LGUI_1] = COMBO_ACTION(combo_LGUI_1),
+    [MY_COMBO_LGUI_2] = COMBO_ACTION(combo_LGUI_2),
+    [MY_COMBO_LGUI_3] = COMBO_ACTION(combo_LGUI_3),
+    [MY_COMBO_LGUI_4] = COMBO_ACTION(combo_LGUI_4),
+    [MY_COMBO_LGUI_5] = COMBO_ACTION(combo_LGUI_5),
+    [MY_COMBO_LGUI_6] = COMBO_ACTION(combo_LGUI_6),
+    [MY_COMBO_LGUI_7] = COMBO_ACTION(combo_LGUI_7),
+    [MY_COMBO_LGUI_8] = COMBO_ACTION(combo_LGUI_8),
+    [MY_COMBO_LGUI_9] = COMBO_ACTION(combo_LGUI_9),
+    [MY_COMBO_LGUI_0] = COMBO_ACTION(combo_LGUI_0),
+};
+
+#define COMBO_MODS_SHIFT (get_mods() & MOD_BIT(KC_LSHIFT) || get_mods() & MOD_BIT(KC_RSHIFT))
+#define SEND_CAP_STRING(str, capitalized) if (COMBO_MODS_SHIFT) { \
+                                            clear_mods(); \
+                                            SEND_STRING(capitalized); \
+                                          } else { \
+                                            SEND_STRING(str); \
+                                          }
+
+void process_combo_event(uint16_t combo_index, bool pressed) {
+    switch(combo_index) {
+        case MY_COMBO_LGUI_1:
+            if (pressed) {
+                SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_1) SS_UP(X_LGUI));
+            }
+            break;
+        case MY_COMBO_LGUI_2:
+            if (pressed) {
+                SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_2) SS_UP(X_LGUI));
+            }
+            break;
+        case MY_COMBO_LGUI_3:
+            if (pressed) {
+                SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_3) SS_UP(X_LGUI));
+            }
+            break;
+        case MY_COMBO_LGUI_4:
+            if (pressed) {
+                SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_4) SS_UP(X_LGUI));
+            }
+            break;
+        case MY_COMBO_LGUI_5:
+            if (pressed) {
+                SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_5) SS_UP(X_LGUI));
+            }
+            break;
+        case MY_COMBO_LGUI_6:
+            if (pressed) {
+                SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_6) SS_UP(X_LGUI));
+            }
+            break;
+        case MY_COMBO_LGUI_7:
+            if (pressed) {
+                SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_7) SS_UP(X_LGUI));
+            }
+            break;
+        case MY_COMBO_LGUI_8:
+            if (pressed) {
+                SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_8) SS_UP(X_LGUI));
+            }
+            break;
+        case MY_COMBO_LGUI_9:
+            if (pressed) {
+                SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_9) SS_UP(X_LGUI));
+            }
+            break;
+        case MY_COMBO_LGUI_0:
+            if (pressed) {
+                SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_0) SS_UP(X_LGUI));
+            }
+            break;
+
     }
 }
