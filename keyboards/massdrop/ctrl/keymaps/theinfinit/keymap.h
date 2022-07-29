@@ -55,3 +55,14 @@ enum layout_names {
     _NSL,                       // Symbols from number row
     _FL,                        // Function Layout: The function key activated layout with default functions and some added ones
 };
+
+#pragma once
+
+// Combo feature timeout (defaults to TAPPING_TERM)
+#define COMBO_TERM 50
+
+// Size of combo_events enum.
+#define COMBO_COUNT 28
+
+#undef TAPPING_TERM
+#define TAPPING_TERM 260
