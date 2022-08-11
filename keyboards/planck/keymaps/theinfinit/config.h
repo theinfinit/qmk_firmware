@@ -52,7 +52,7 @@
 #define COMBO_TERM 50
 
 // Size of combo_events enum.
-#define COMBO_COUNT 10
+#define COMBO_COUNT 13
 
 #undef TAPPING_TERM
 #define TAPPING_TERM 260

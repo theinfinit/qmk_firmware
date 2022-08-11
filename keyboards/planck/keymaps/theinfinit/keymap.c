@@ -95,9 +95,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤
  *                 │ Sft │  Z  │  X  │  C  │  V  │  B  │   │  N  │  M  │  ,  │  .  │  /  │ Esc │
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤
- * Tap for PrSc -- │ Ctl │ Gui │FKEYS│ Alt │Raise│Space│   │ Nav │Lower│ _SL │ Ins │ Fn  │ App │
- *                 ╰─────┴─────┴─────┴─────┴─────┴─────┴   ┴─────┴─────┴─────┴─────┴─────┴─────╯
- *                                           Tap for Space __/
+ *  Tap for PrSc ──┤ Ctl │ Gui │FKEYS│ Alt │Raise│Space│   │ Nav │Lower│ _SL │ Ins │ Fn  │ App │
+ *                 ╰─────┴─────┴─────┴─────┴──┬──┴─────┴   ┴──┬──┴──┬──┴─────┴─────┴─────┴─────╯
+ *                                            │ Tap for Space ╯     │
+ *                                            ╰──────────┬──────────╯
+ *                Hold both keys to activate FKEYS layer ╯
  */
 [_QWERTY] = LAYOUT_planck_grid(
     KC_TAB,  KC_Q,    KC_W,   KC_E,    KC_R,   KC_T,   KC_Y, KC_U,   KC_I,    KC_O,   KC_P,      KC_QUOT,
@@ -114,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤
  *                 │ Sft │  Z  │  X  │  C  │  V  │  B  │   │  N  │  M  │  ,  │  .  │  /  │ Esc │
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤
- * Tap for PrSc -- │ Gui │ Ctl │FKEYS│ Alt │Raise│Space│   │iNav │Lower│_iSL │ Ins │ Fn  │ App │
+ *  Tap for PrSc ──┤ Gui │ Ctl │FKEYS│ Alt │Raise│Space│   │iNav │Lower│_iSL │ Ins │ Fn  │ App │
  *                 ╰─────┴─────┴─────┴─────┴─────┴─────┴   ┴─────┴─────┴─────┴─────┴─────┴─────╯
  */
 [_MAC] = LAYOUT_planck_grid(
@@ -162,11 +164,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Symbol layer
  *                 ╭─────┬─────┬─────┬─────┬─────┬─────┬   ┬─────┬─────┬─────┬─────┬─────┬─────╮
- *                 │     │     │     │     │     │     │   │  _  │  &  │  *  │  ~  │  *  │     │╲
- *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤ |
- *                 │     │     │     │     │     │     │   │ndash│  $  │  %  │  ^  │  `  │     │ |-- Mostly shifted version
- *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤ |   of lower layer
- *                 │     │     │     │     │     │     │   │mdash│  !  │  @  │  #  │  /  │     │╱
+ *                 │     │     │     │     │     │     │   │  _  │  &  │  *  │  ~  │  *  │     ├ ─╮
+ *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤  │
+ *                 │     │     │     │     │     │     │   │ndash│  $  │  %  │  ^  │  `  │     │  ├── Mostly shifted version
+ *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤  │   of lower layer
+ *                 │     │     │     │     │     │     │   │mdash│  !  │  @  │  #  │  /  │     ├ ─╯
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼┬┬┬┬┬┼─────┼─────┼─────┤
  *                 │     │     │     │     │     │     │   │     │     │││││││     │     │     │
  *                 ╰─────┴─────┴─────┴─────┴─────┴─────┴   ┴─────┴─────┴┴┴┴┴┴┴─────┴─────┴─────╯
@@ -180,11 +182,11 @@ _______, _______, _______,  _______, _______, _______, _______, _______, _______
 
 /* Symbol layer (Mac/iPad)
  *                 ╭─────┬─────┬─────┬─────┬─────┬─────┬   ┬─────┬─────┬─────┬─────┬─────┬─────╮
- *                 │     │     │     │     │     │     │   │  _  │  &  │  *  │  ~  │  *  │     │╲
- *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤ |
- *                 │     │     │     │     │     │     │   │ndash│  $  │  %  │  ^  │  `  │     │ |-- Mostly shifted version
- *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤ |   of lower layer
- *                 │     │     │     │     │     │     │   │mdash│  !  │  @  │  #  │  /  │     │╱
+ *                 │     │     │     │     │     │     │   │  _  │  &  │  *  │  ~  │  *  │     ├ ─╮
+ *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤  │
+ *                 │     │     │     │     │     │     │   │ndash│  $  │  %  │  ^  │  `  │     │  ├── Mostly shifted version
+ *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤  │   of lower layer
+ *                 │     │     │     │     │     │     │   │mdash│  !  │  @  │  #  │  /  │     ├ ─╯
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼┬┬┬┬┬┼─────┼─────┼─────┤
  *                 │     │     │     │     │     │     │   │     │     │││││││     │     │     │
  *                 ╰─────┴─────┴─────┴─────┴─────┴─────┴   ┴─────┴─────┴┴┴┴┴┴┴─────┴─────┴─────╯
@@ -236,7 +238,7 @@ _______, _______, _______,  _______, _______, _______, _______, _______, _______
 
 /* Adjust
  *
- *                RGB CONTROL -----/````````````````````````````````````````````````````````\
+ *                RGB CONTROL ─────┬─────────────────────────────────────────────────────────╮
  *           ╭──────┬──────┬──────┬──────┬──────┬──────┬   ┬──────┬──────┬──────┬──────┬──────┬──────╮
  *           │      │      │Debug │Voice-│RGBMOD│ HUE+ │   │ HUE- │ SAT+ │ SAT- │BRGTH+│BRGTH-│  Del │
  *           ├──────┼──────┼──────┼──────┼──────┼──────┼   ┼──────┼──────┼──────┼──────┼──────┼──────┤
@@ -352,10 +354,10 @@ _______, _______, _______,  _______, _______, _______, _______, _______, _______
     float plover_gb_song[][2]  = SONG(PLOVER_GOODBYE_SOUND);
 #endif
 
-// Probably to enable activation of layer by pressing Lower + Raise
-// layer_state_t layer_state_set_user(layer_state_t state) {
-//     return update_tri_layer_state(state, _LOWER, _RAISE, _FN);
-// }
+// activate layer by pressing Lower + Raise
+layer_state_t layer_state_set_user(layer_state_t state) {
+    return update_tri_layer_state(state, _LOWER, _RAISE, _FKEYS);
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -560,7 +562,11 @@ enum combo_events {
     MY_COMBO_LGUI_7,
     MY_COMBO_LGUI_8,
     MY_COMBO_LGUI_9,
-    MY_COMBO_LGUI_0
+    MY_COMBO_LGUI_0,
+
+    MY_COMBO_CUT,
+    MY_COMBO_COPY,
+    MY_COMBO_PASTE
 };
 
 const uint16_t PROGMEM combo_LGUI_1[] = { LOWER, KC_M, COMBO_END };
@@ -574,6 +580,10 @@ const uint16_t PROGMEM combo_LGUI_8[] = { LOWER, KC_I, COMBO_END };
 const uint16_t PROGMEM combo_LGUI_9[] = { LOWER, KC_O, COMBO_END };
 const uint16_t PROGMEM combo_LGUI_0[] = { LOWER, RALT_SCLN, COMBO_END };
 
+const uint16_t PROGMEM combo_CUT[] = { RAISE, KC_X, COMBO_END };
+const uint16_t PROGMEM combo_COPY[] = { RAISE, KC_C, COMBO_END };
+const uint16_t PROGMEM combo_PASTE[] = { RAISE, KC_V, COMBO_END };
+
 combo_t key_combos[COMBO_COUNT] = {
     [MY_COMBO_LGUI_1] = COMBO_ACTION(combo_LGUI_1),
     [MY_COMBO_LGUI_2] = COMBO_ACTION(combo_LGUI_2),
@@ -585,6 +595,10 @@ combo_t key_combos[COMBO_COUNT] = {
     [MY_COMBO_LGUI_8] = COMBO_ACTION(combo_LGUI_8),
     [MY_COMBO_LGUI_9] = COMBO_ACTION(combo_LGUI_9),
     [MY_COMBO_LGUI_0] = COMBO_ACTION(combo_LGUI_0),
+
+    [MY_COMBO_CUT] = COMBO_ACTION(combo_CUT),
+    [MY_COMBO_COPY] = COMBO_ACTION(combo_COPY),
+    [MY_COMBO_PASTE] = COMBO_ACTION(combo_PASTE),
 };
 
 #define COMBO_MODS_SHIFT (get_mods() & MOD_BIT(KC_LSHIFT) || get_mods() & MOD_BIT(KC_RSHIFT))
@@ -648,5 +662,20 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             }
             break;
 
+        case MY_COMBO_CUT:
+            if (pressed) {
+                SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_X) SS_UP(X_LCTL));
+            }
+            break;
+        case MY_COMBO_COPY:
+            if (pressed) {
+                SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_C) SS_UP(X_LCTL));
+            }
+            break;
+        case MY_COMBO_PASTE:
+            if (pressed) {
+                SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_V) SS_UP(X_LCTL));
+            }
+            break;
     }
 }
