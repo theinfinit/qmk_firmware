@@ -14,6 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// #pragma message: The default behavior of mod-taps will change to mimic IGNORE_MOD_TAP_INTERRUPT in the future.
+// If you wish to keep the old default behavior of mod-taps, please use HOLD_ON_OTHER_KEY_PRESS.'
+//   16 | #            pragma message "The default behavior of mod-taps will change to mimic IGNORE_MOD_TAP_INTERRUPT in the future.\nIf you wish to keep the old default behavior of mod-taps, please use HOLD_ON_OTHER_KEY_PRESS."
+
 #include QMK_KEYBOARD_H
 #include "muse.h"
 #include "keymap_steno.h"
@@ -50,7 +54,6 @@ enum planck_keycodes {
 // Layers
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
-#define FKEYS MO(_FKEYS)
 #define FN MO(_FN)
 #define NAV LT(_NAV, KC_SPC)
 #define iNAV LT(_iNAV, KC_SPC)
@@ -58,6 +61,7 @@ enum planck_keycodes {
 // Mod on hold, key on tap
 #define LALT_A LALT_T(KC_A)       // Hold: Left Alt    // Tap: A
 #define LSFT_S LSFT_T(KC_S)       // Hold: Left Shift  // Tap: S
+#define LSFT_ESC LSFT_T(KC_ESC)   // Hold: Left Shift  // Tap: Esc
 #define LCTL_D LCTL_T(KC_D)       // Hold: Left Ctrl   // Tap: D
 #define LGUI_F LGUI_T(KC_F)       // Hold: Left GUI    // Tap: F
 
@@ -93,19 +97,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤
  *                 │ _TL │Alt/A│Sft/S│Ctl/D│Gui/F│  G  │   │  H  │Gui/J│Ctl/K│Sft/L│Alt/;│Enter│
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤
- *                 │ Sft │  Z  │  X  │  C  │  V  │  B  │   │  N  │  M  │  ,  │  .  │  /  │ Esc │
+ *   Tap for Esc ──┤ Sft │  Z  │  X  │  C  │  V  │  B  │   │  N  │  M  │  ,  │  .  │  /  │ Esc │
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤
- *  Tap for PrSc ──┤ Ctl │ Gui │FKEYS│ Alt │Raise│Space│   │ Nav │Lower│ _SL │ Ins │ Fn  │ App │
+ *  Tap for PrSc ──┤ Ctl │ Gui │Enter│ Alt │Raise│Space│   │ Nav │Lower│ _SL │ Ins │ Fn  │ App │
  *                 ╰─────┴─────┴─────┴─────┴──┬──┴─────┴   ┴──┬──┴──┬──┴─────┴─────┴─────┴─────╯
  *                                            │ Tap for Space ╯     │
  *                                            ╰──────────┬──────────╯
  *                Hold both keys to activate FKEYS layer ╯
  */
 [_QWERTY] = LAYOUT_planck_grid(
-    KC_TAB,  KC_Q,    KC_W,   KC_E,    KC_R,   KC_T,   KC_Y, KC_U,   KC_I,    KC_O,   KC_P,      KC_QUOT,
-    MO(_TL), LALT_A,  LSFT_S, LCTL_D,  LGUI_F, KC_G,   KC_H, RGUI_J, RCTL_K,  RSFT_L, RALT_SCLN, KC_ENT,
-    KC_LSFT, KC_Z,    KC_X,   KC_C,    KC_V,   KC_B,   KC_N, KC_M,   KC_COMM, KC_DOT, KC_SLSH,   KC_ESC,
-    LCTL_PS, KC_LGUI, FKEYS,  KC_LALT, RAISE,  KC_SPC, NAV,  LOWER,  MO(_SL), KC_INS, FN,        KC_APP
+    KC_TAB,   KC_Q,    KC_W,   KC_E,    KC_R,   KC_T,   KC_Y, KC_U,   KC_I,    KC_O,   KC_P,      KC_QUOT,
+    MO(_TL),  LALT_A,  LSFT_S, LCTL_D,  LGUI_F, KC_G,   KC_H, RGUI_J, RCTL_K,  RSFT_L, RALT_SCLN, KC_ENT,
+    LSFT_ESC, KC_Z,    KC_X,   KC_C,    KC_V,   KC_B,   KC_N, KC_M,   KC_COMM, KC_DOT, KC_SLSH,   KC_ESC,
+    LCTL_PS,  KC_LGUI, KC_ENT, KC_LALT, RAISE,  KC_SPC, NAV,  LOWER,  MO(_SL), KC_INS, FN,        KC_APP
 ),
 
 /* Base layer (Mac/iPad)
@@ -114,16 +118,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤
  *                 │ iTL │Alt/A│Sft/S│Gui/D│Ctl/F│  G  │   │  H  │Ctl/J│Gui/K│Sft/L│Alt/;│Enter│
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤
- *                 │ Sft │  Z  │  X  │  C  │  V  │  B  │   │  N  │  M  │  ,  │  .  │  /  │ Esc │
+ *   Tap for Esc ──┤ Sft │  Z  │  X  │  C  │  V  │  B  │   │  N  │  M  │  ,  │  .  │  /  │ Esc │
  *                 ├─────┼─────┼─────┼─────┼─────┼─────┼   ┼─────┼─────┼─────┼─────┼─────┼─────┤
- *  Tap for PrSc ──┤ Gui │ Ctl │FKEYS│ Alt │Raise│Space│   │iNav │Lower│_iSL │ Ins │ Fn  │ App │
- *                 ╰─────┴─────┴─────┴─────┴─────┴─────┴   ┴─────┴─────┴─────┴─────┴─────┴─────╯
+ *  Tap for PrSc ──┤ Gui │ Ctl │Enter│ Alt │Raise│Space│   │iNav │Lower│_iSL │ Ins │ Fn  │ App │
+ *                 ╰─────┴─────┴─────┴─────┴──┬──┴─────┴   ┴──┬──┴──┬──┴─────┴─────┴─────┴─────╯
+ *                                            │ Tap for Space ╯     │
+ *                                            ╰──────────┬──────────╯
+ *                Hold both keys to activate FKEYS layer ╯
  */
 [_MAC] = LAYOUT_planck_grid(
     KC_TAB,   KC_Q,    KC_W,   KC_E,    KC_R,    KC_T,   KC_Y,  KC_U,    KC_I,     KC_O,   KC_P,      KC_QUOT,
     MO(_iTL), LALT_A,  LSFT_S, iLGUI_D, iLCTL_F, KC_G,   KC_H,  iRCTL_J, iRGUI_K,  RSFT_L, RALT_SCLN, KC_ENT,
-    KC_LSFT,  KC_Z,    KC_X,   KC_C,    KC_V,    KC_B,   KC_N,  KC_M,    KC_COMM,  KC_DOT, KC_SLSH,   KC_ESC,
-    LGUI_PS,  KC_LCTL, FKEYS,  KC_LALT, RAISE,   KC_SPC, iNAV,  LOWER,   MO(_iSL), KC_INS, FN,        KC_APP
+    LSFT_ESC, KC_Z,    KC_X,   KC_C,    KC_V,    KC_B,   KC_N,  KC_M,    KC_COMM,  KC_DOT, KC_SLSH,   KC_ESC,
+    LGUI_PS,  KC_LCTL, KC_ENT, KC_LALT, RAISE,   KC_SPC, iNAV,  LOWER,   MO(_iSL), KC_INS, FN,        KC_APP
 ),
 
 /* Stenography layer
@@ -174,10 +181,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                 ╰─────┴─────┴─────┴─────┴─────┴─────┴   ┴─────┴─────┴┴┴┴┴┴┴─────┴─────┴─────╯
  */
 [_SL] = LAYOUT_planck_grid(
-_______, _______, _______,  _______, _______, _______, KC_UNDS, KC_AMPR, KC_ASTR, KC_TILD, KC_ASTR, _______,
-_______, _______, _______,  _______, _______, _______, NDASH,   KC_DLR,  KC_PERC, KC_CIRC, KC_GRV,  _______,
-_______, _______, _______,  _______, _______, _______, MDASH,   KC_EXLM, KC_AT,   KC_HASH, _______, _______,
-_______, _______, _______,  _______, _______, _______, _______, _______, _______, _______, _______, _______
+_______, _______, _______, _______, _______, _______, KC_UNDS, KC_AMPR, KC_ASTR, KC_TILD, KC_ASTR, _______,
+_______, _______, _______, _______, _______, _______, NDASH,   KC_DLR,  KC_PERC, KC_CIRC, KC_GRV,  _______,
+_______, _______, _______, _______, _______, _______, MDASH,   KC_EXLM, KC_AT,   KC_HASH, _______, _______,
+_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
 /* Symbol layer (Mac/iPad)
@@ -238,22 +245,22 @@ _______, _______, _______,  _______, _______, _______, _______, _______, _______
 
 /* Adjust
  *
- *                RGB CONTROL ─────┬─────────────────────────────────────────────────────────╮
+ *        RGB CONTROL ─────┬────────────────────╮
  *           ╭──────┬──────┬──────┬──────┬──────┬──────┬   ┬──────┬──────┬──────┬──────┬──────┬──────╮
- *           │      │      │Debug │Voice-│RGBMOD│ HUE+ │   │ HUE- │ SAT+ │ SAT- │BRGTH+│BRGTH-│  Del │
+ *           │      │      │RGBMOD│ HUE+ │ HUE- │Aud On│   │AudOff│Mus On│MusOff│      │      │      │
  *           ├──────┼──────┼──────┼──────┼──────┼──────┼   ┼──────┼──────┼──────┼──────┼──────┼──────┤
- *           │      │      │MUSmod│Aud on│Audoff│AGnorm│   │AGswap│Qwerty│ Mac  │Plover│      │      │
+ *           │      │      │      │ SAT+ │ SAT- │AGnorm│   │AGswap│Qwerty│ Mac  │Plover│      │      │
  *           ├──────┼──────┼──────┼──────┼──────┼──────┼   ┼──────┼──────┼──────┼──────┼──────┼──────┤
- *           │      │ RGB  │Voice+│Mus on│Musoff│Reset │   │MIDIof│TermOn│TermOf│      │      │      │
+ *           │      │ RGB  │      │BRGTH+│BRGTH-│Reset │   │MIDIof│      │      │      │      │      │
  *           ├──────┼──────┼──────┼──────┼──────┼──────┼   ┼──────┼──────┼──────┼──────┼┬┬┬┬┬┬┼──────┤
- *           │Brite │      │      │      │      │MIDIon│   │      │      │      │      ││││││││      │
+ *           │      │      │      │      │      │MIDIon│   │      │      │      │      ││││││││      │
  *           ╰──────┴──────┴──────┴──────┴──────┴──────┴   ┴──────┴──────┴──────┴──────┴┴┴┴┴┴┴┴──────╯
  */
 [_FN] = LAYOUT_planck_grid(
-    _______, _______, DEBUG,   MUV_DE,  RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD,  RGB_VAI, RGB_VAD, _______,
-    _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  MAC,      PLOVER,  _______, _______,
-    _______, RGB_TOG, MUV_IN,  MU_ON,   MU_OFF,  QK_BOOT, MI_OFF,  TERM_ON, TERM_OFF, _______, _______, _______,
-    _______, _______, _______, _______, _______, MI_ON,   _______, _______, _______,  _______, _______, _______
+    _______, _______, RGB_MOD, RGB_HUI, RGB_HUD, AU_ON,   AU_OFF,  MU_ON,   MU_OFF,  _______, _______, _______,
+    _______, _______, _______, RGB_SAI, RGB_SAD, AG_NORM, AG_SWAP, QWERTY,  MAC,     PLOVER,  _______, _______,
+    _______, RGB_TOG, _______, RGB_VAI, RGB_VAD, QK_BOOT, MI_OFF,  _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, MI_ON,   _______, _______, _______, _______, _______, _______
 ),
 
 /* Navigation layer
@@ -443,6 +450,60 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
             break;
+        // case QUOTE_DOUBLE_LEFT_LOW: // „
+        //     if (record->event.pressed) {
+        //         SEND_STRING(SS_LALT(SS_TAP(X_KP_0) SS_TAP(X_KP_1) SS_TAP(X_KP_3) SS_TAP(X_KP_2)));
+        //     }
+        //     return false;
+        //     break;
+        // case QUOTE_DOUBLE_LEFT: // “
+        //     if (record->event.pressed) {
+        //         SEND_STRING(SS_LALT(SS_TAP(X_KP_0) SS_TAP(X_KP_1) SS_TAP(X_KP_4) SS_TAP(X_KP_7)));
+        //     }
+        //     return false;
+        //     break;
+        // case QUOTE_DOUBLE_RIGHT: // ”
+        //     if (record->event.pressed) {
+        //         SEND_STRING(SS_LALT(SS_TAP(X_KP_0) SS_TAP(X_KP_1) SS_TAP(X_KP_4) SS_TAP(X_KP_8)));
+        //     }
+        //     return false;
+        //     break;
+        // case QUOTE_SINGLE_LEFT: // ‘
+        //     if (record->event.pressed) {
+        //         SEND_STRING(SS_LALT(SS_TAP(X_KP_0) SS_TAP(X_KP_1) SS_TAP(X_KP_4) SS_TAP(X_KP_5)));
+        //     }
+        //     return false;
+        //     break;
+        // case QUOTE_SINGLE_RIGHT: // ’
+        //     if (record->event.pressed) {
+        //         SEND_STRING(SS_LALT(SS_TAP(X_KP_0) SS_TAP(X_KP_1) SS_TAP(X_KP_4) SS_TAP(X_KP_6)));
+        //     }
+        //     return false;
+        //     break;
+        // case QUOTE_ANGLE_RIGHT: // » OK
+        //     if (record->event.pressed) {
+        //         SEND_STRING(SS_LALT(SS_TAP(X_KP_1) SS_TAP(X_KP_7) SS_TAP(X_KP_5)));
+        //     }
+        //     return false;
+        //     break;
+        // case QUOTE_ANGLE_LEFT: // « 
+        //     if (record->event.pressed) {
+        //         SEND_STRING(SS_LALT(SS_TAP(X_KP_1) SS_TAP(X_KP_7) SS_TAP(X_KP_4)));
+        //     }
+        //     return false;
+        //     break;
+        // case THREE_DOT: // … OK
+        //     if (record->event.pressed) {
+        //         SEND_STRING(SS_LALT(SS_TAP(X_KP_0) SS_TAP(X_KP_1) SS_TAP(X_KP_3) SS_TAP(X_KP_3)));
+        //     }
+        //     return false;
+        //     break;
+        // case BULLET: // •
+        //     if (record->event.pressed) {
+        //         SEND_STRING(SS_LALT(SS_TAP(X_KP_0) SS_TAP(X_KP_1) SS_TAP(X_KP_4) SS_TAP(X_KP_9)));
+        //     }
+        //     return false;
+        //     break;
     }
 
     return true; //Process all other
@@ -564,9 +625,19 @@ enum combo_events {
     MY_COMBO_LGUI_9,
     MY_COMBO_LGUI_0,
 
-    MY_COMBO_CUT,
-    MY_COMBO_COPY,
-    MY_COMBO_PASTE
+    MY_COMBO_F1,
+    MY_COMBO_F2,
+    MY_COMBO_F3,
+    MY_COMBO_F4,
+    MY_COMBO_F5,
+    MY_COMBO_F6,
+    MY_COMBO_F7,
+    MY_COMBO_F8,
+    MY_COMBO_F9,
+    MY_COMBO_F10,
+    MY_COMBO_F11,
+    MY_COMBO_F12
+    // Remember to update COMBO_COUNT in config.h
 };
 
 const uint16_t PROGMEM combo_LGUI_1[] = { LOWER, KC_M, COMBO_END };
@@ -580,9 +651,18 @@ const uint16_t PROGMEM combo_LGUI_8[] = { LOWER, KC_I, COMBO_END };
 const uint16_t PROGMEM combo_LGUI_9[] = { LOWER, KC_O, COMBO_END };
 const uint16_t PROGMEM combo_LGUI_0[] = { LOWER, RALT_SCLN, COMBO_END };
 
-const uint16_t PROGMEM combo_CUT[] = { RAISE, KC_X, COMBO_END };
-const uint16_t PROGMEM combo_COPY[] = { RAISE, KC_C, COMBO_END };
-const uint16_t PROGMEM combo_PASTE[] = { RAISE, KC_V, COMBO_END };
+const uint16_t PROGMEM combo_F1[] = { RAISE, KC_V, COMBO_END };
+const uint16_t PROGMEM combo_F2[] = { RAISE, KC_C, COMBO_END };
+const uint16_t PROGMEM combo_F3[] = { RAISE, KC_X, COMBO_END };
+const uint16_t PROGMEM combo_F4[] = { RAISE, KC_Z, COMBO_END };
+const uint16_t PROGMEM combo_F5[] = { RAISE, LGUI_F, COMBO_END };
+const uint16_t PROGMEM combo_F6[] = { RAISE, LCTL_D, COMBO_END };
+const uint16_t PROGMEM combo_F7[] = { RAISE, LSFT_S, COMBO_END };
+const uint16_t PROGMEM combo_F8[] = { RAISE, LALT_A, COMBO_END };
+const uint16_t PROGMEM combo_F9[] = { RAISE, KC_R, COMBO_END };
+const uint16_t PROGMEM combo_F10[] = { RAISE, KC_E, COMBO_END };
+const uint16_t PROGMEM combo_F11[] = { RAISE, KC_W, COMBO_END };
+const uint16_t PROGMEM combo_F12[] = { RAISE, KC_Q, COMBO_END };
 
 combo_t key_combos[COMBO_COUNT] = {
     [MY_COMBO_LGUI_1] = COMBO_ACTION(combo_LGUI_1),
@@ -596,9 +676,18 @@ combo_t key_combos[COMBO_COUNT] = {
     [MY_COMBO_LGUI_9] = COMBO_ACTION(combo_LGUI_9),
     [MY_COMBO_LGUI_0] = COMBO_ACTION(combo_LGUI_0),
 
-    [MY_COMBO_CUT] = COMBO_ACTION(combo_CUT),
-    [MY_COMBO_COPY] = COMBO_ACTION(combo_COPY),
-    [MY_COMBO_PASTE] = COMBO_ACTION(combo_PASTE),
+    [MY_COMBO_F1] = COMBO_ACTION(combo_F1),
+    [MY_COMBO_F2] = COMBO_ACTION(combo_F2),
+    [MY_COMBO_F3] = COMBO_ACTION(combo_F3),
+    [MY_COMBO_F4] = COMBO_ACTION(combo_F4),
+    [MY_COMBO_F5] = COMBO_ACTION(combo_F5),
+    [MY_COMBO_F6] = COMBO_ACTION(combo_F6),
+    [MY_COMBO_F7] = COMBO_ACTION(combo_F7),
+    [MY_COMBO_F8] = COMBO_ACTION(combo_F8),
+    [MY_COMBO_F9] = COMBO_ACTION(combo_F9),
+    [MY_COMBO_F10] = COMBO_ACTION(combo_F10),
+    [MY_COMBO_F11] = COMBO_ACTION(combo_F11),
+    [MY_COMBO_F12] = COMBO_ACTION(combo_F12),
 };
 
 #define COMBO_MODS_SHIFT (get_mods() & MOD_BIT(KC_LSHIFT) || get_mods() & MOD_BIT(KC_RSHIFT))
@@ -662,19 +751,64 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             }
             break;
 
-        case MY_COMBO_CUT:
+        case MY_COMBO_F1:
             if (pressed) {
-                SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_X) SS_UP(X_LCTL));
+                SEND_STRING(SS_TAP(X_F1));
             }
             break;
-        case MY_COMBO_COPY:
+        case MY_COMBO_F2:
             if (pressed) {
-                SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_C) SS_UP(X_LCTL));
+                SEND_STRING(SS_TAP(X_F2));
             }
             break;
-        case MY_COMBO_PASTE:
+        case MY_COMBO_F3:
             if (pressed) {
-                SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_V) SS_UP(X_LCTL));
+                SEND_STRING(SS_TAP(X_F3));
+            }
+            break;
+        case MY_COMBO_F4:
+            if (pressed) {
+                SEND_STRING(SS_TAP(X_F4));
+            }
+            break;
+        case MY_COMBO_F5:
+            if (pressed) {
+                SEND_STRING(SS_TAP(X_F5));
+            }
+            break;
+        case MY_COMBO_F6:
+            if (pressed) {
+                SEND_STRING(SS_TAP(X_F6));
+            }
+            break;
+        case MY_COMBO_F7:
+            if (pressed) {
+                SEND_STRING(SS_TAP(X_F7));
+            }
+            break;
+        case MY_COMBO_F8:
+            if (pressed) {
+                SEND_STRING(SS_TAP(X_F8));
+            }
+            break;
+        case MY_COMBO_F9:
+            if (pressed) {
+                SEND_STRING(SS_TAP(X_F9));
+            }
+            break;
+        case MY_COMBO_F10:
+            if (pressed) {
+                SEND_STRING(SS_TAP(X_F10));
+            }
+            break;
+        case MY_COMBO_F11:
+            if (pressed) {
+                SEND_STRING(SS_TAP(X_F11));
+            }
+            break;
+        case MY_COMBO_F12:
+            if (pressed) {
+                SEND_STRING(SS_TAP(X_F12));
             }
             break;
     }
