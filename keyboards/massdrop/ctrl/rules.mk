@@ -23,7 +23,6 @@ AUDIO_ENABLE = no           # Audio output
 VIRTSER_ENABLE = no         # USB Serial Driver
 RAW_ENABLE = no             # Raw device
 AUTO_SHIFT_ENABLE = no      # Auto Shift
-COMBO_ENABLE = yes 			# Enable Combos
 
 # Custom RGB matrix handling
 RGB_MATRIX_ENABLE = yes
